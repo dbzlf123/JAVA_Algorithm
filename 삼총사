@@ -1,0 +1,36 @@
+//삼총사
+//https://school.programmers.co.kr/learn/courses/30/lessons/131705
+
+import java.util.*;
+class Solution {
+    static int answer = 0;
+    static boolean [] visit;
+    
+    public void Find(int idx, int maxPeople, int sum, int[] number){
+        if(maxPeople == 3){
+            if(sum == 0){
+                answer++;
+            }
+            return;
+        }
+        
+        for(int i = idx; i < number.length; i++){
+            if(!visit[i]){
+                visit[i] = true;
+                Find(i + 1, maxPeople + 1, sum + number[i] , number);
+                visit[i] = false;
+            }
+        }
+    }
+    
+    public int solution(int[] number) {
+
+        visit = new boolean[number.length];
+        Find(0, 0, 0, number);
+        
+        
+        return answer;
+    }
+}
+
+//백트랙킹
