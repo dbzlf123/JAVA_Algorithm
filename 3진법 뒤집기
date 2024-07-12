@@ -1,0 +1,15 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/68935
+
+class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        String tempAnswer = "";
+
+        StringBuilder sb = new StringBuilder(Integer.toString(n, 3));
+
+        tempAnswer = sb.reverse().toString();
+        answer = Integer.parseInt(tempAnswer, 3);
+        
+        return answer;
+    }
+}
