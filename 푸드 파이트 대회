@@ -1,0 +1,26 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/134240
+
+
+
+class Solution {
+    public String solution(int[] food) {
+        
+        StringBuilder tempString = new StringBuilder();
+        StringBuilder answerString = new StringBuilder();
+
+        for(int i = 1; i < food.length; i++){
+            int foodNums = food[i] / 2; //만약 0 이 아니라면 할 수 있음, ex) 1이면 최소 2개가 준비되어있음
+            if(foodNums != 0){
+                for(int j= 0; j < foodNums; j++){
+                    tempString.append(i);
+                }
+            }
+        }
+
+        answerString.append(tempString);
+        answerString.append('0');
+        answerString.append(tempString.reverse());
+        
+        return answerString.toString();
+    }
+}
