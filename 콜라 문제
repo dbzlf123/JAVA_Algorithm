@@ -1,0 +1,21 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/132267
+
+class Solution {
+    
+    static int answer = 0;
+    public static void cola(int a, int b, int n)
+    {
+        if(a > n){
+            return;
+        }
+
+        answer += (n / a) * b;
+        cola(a, b, (n / a) * b + (n % a));
+
+    }
+    
+    public int solution(int a, int b, int n) {
+        cola(a, b, n);
+        return answer;
+    }
+}
