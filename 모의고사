@@ -1,0 +1,40 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/42840?language=java
+
+
+import java.util.*;
+import static java.lang.Math.max;
+
+class Solution {
+    public int[] solution(int[] answers) {
+       int[] person1 = {1, 2, 3, 4, 5};
+        int[] person2 = {2, 1, 2, 3, 2, 4, 2, 5};
+        int[] person3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+        int cnt1 = 0, cnt2 = 0, cnt3 = 0;
+
+        for(int i = 0; i < answers.length; i++){
+            if(person1[i % 5] == answers[i]){
+                cnt1++;
+            }
+            if(person2[i % 8] == answers[i]){
+                cnt2++;
+            }
+            if(person3[i % 10] == answers[i]){
+                cnt3++;
+            }
+        }
+
+        int maxScore = max(cnt1, max(cnt2, cnt3));
+
+        List<Integer> answer = new ArrayList<>();
+        if(maxScore == cnt1) answer.add(1);
+        if(maxScore == cnt2) answer.add(2);
+        if(maxScore == cnt3) answer.add(3);
+        
+        int[] trueAnswer = new int[answer.size()];
+        for(int i = 0 ; i < answer.size(); i++){
+            trueAnswer[i] = answer.get(i);
+        }
+
+        return trueAnswer;
+    }
+}
