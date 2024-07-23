@@ -1,0 +1,36 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/12977?language=java
+
+class Solution {
+    
+    private static int answer = 0;
+    private static boolean[] visit;
+    public static void dfs(int maxNums, int result, int[] arr, int idx){
+        if(maxNums == 3){
+            for(int i = 2; i < result; i++){
+                if(result % i == 0){
+                    return;
+                }
+            }
+            answer++;
+            return;
+        }
+
+        for(int i = idx; i < arr.length; i++){
+            if(!visit[i]){
+                visit[i] = true;
+                dfs(maxNums + 1, result +  arr[i], arr, i + 1);
+                visit[i] = false;
+            }
+        }
+
+        return;
+    }
+    public int solution(int[] nums) {
+
+        
+        visit = new boolean[nums.length];
+        dfs(0, 0, nums, 0);
+        
+        return answer;
+    }
+}
