@@ -1,0 +1,84 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/136798/solution_groups?language=java
+
+
+//일반적인 풀이
+class Solution {
+    public int solution(int number, int limit, int power) {
+        int answer = 0;
+        
+        for(int cnt = 1; cnt <= number; cnt++) {
+            int tempItem = 0;
+            for (int i = 1; i * i <= cnt; i++) {
+                if (i * i == cnt) tempItem++;
+                else if (cnt % i == 0) tempItem += 2;
+            }
+            if(limit < tempItem){
+                answer += power;
+            }else answer += tempItem;
+        }
+        
+        return answer;
+    }
+}
+
+
+//위 풀이를 재귀로 푼 풀이
+
+class Solution {
+       static int tempResult = 0;
+    static void req(int nums, int idx){
+        if(idx * idx > nums){
+            return;
+        }
+
+        if(idx * idx == nums) tempResult++;
+        else if(nums % idx == 0) tempResult += 2;
+
+        req(nums, idx + 1);
+    }
+    
+    
+    public int solution(int number, int limit, int power) {
+        int answer = 0;
+        
+       for(int i = 1; i <= number; i++){
+            req(i, 1);
+
+            if(tempResult > limit) answer += power;
+            else answer += tempResult;
+
+            tempResult = 0;
+        }
+
+        
+        return answer;
+    }
+}
+
+
+
+//다른 사람의 풀이(반복문 줄이기)
+
+class Solution {
+    
+    
+    public int solution(int number, int limit, int power) {
+        int answer = 0;
+        
+        int[] arr = new int[number + 1];
+        
+         for(int i = 1; i <= number; i++){
+            for(int j = 1; j <= number / i; j++){
+                arr[i * j]++;
+            }
+        }
+
+        for(int i = 1; i <= number; i++){
+            if(arr[i] > limit){
+                answer += power;
+            }else answer += arr[i];
+        }
+        
+        return answer;
+    }
+}
