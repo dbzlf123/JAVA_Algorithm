@@ -1,0 +1,41 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/77484?language=java
+
+import java.util.*;
+
+
+class Solution {
+    public int[] solution(int[] lottos, int[] win_nums) {
+ Map<Integer, Boolean> map = new HashMap<>();
+
+        int zero = 0;
+        for (int temp : lottos){
+            if(temp == 0){
+                zero++;
+                continue;
+            }
+            map.put(temp, true);
+        }
+        int cnt = 0;
+        for(int temp : win_nums){
+            if(map.containsKey(temp)) cnt++;
+        }
+
+        int[] answers = new int[2];
+
+        int mins = 0;
+        int maxx = 0;
+
+        if(cnt<2) mins = 6;
+        else mins = 6-cnt+1;
+
+        if(zero + cnt<2) maxx =6;
+        else maxx = 6-(zero + cnt)+1;
+
+        answers[0] = maxx;
+        answers[1] = mins;
+        
+        return answers;
+    }
+}
+
+//대규모 데이터를 대비해서 2중 For 문이 아닌 Hash 자료구조에 넣어준다.
