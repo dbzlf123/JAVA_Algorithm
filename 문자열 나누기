@@ -1,0 +1,86 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/140108?language=java
+
+
+//String Builder 를 이용한 문제풀이(문자열 직접 조작)
+
+class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        
+        StringBuilder str = new StringBuilder();
+        str.append(s);
+        int cnt = 0;
+
+        while(true) {
+            char firstWord = str.charAt(0);
+            int sameCnt = 0;
+            int differentCnt = 0;
+
+            for (int i = 0; i < str.length(); i++) {
+                if (firstWord == str.charAt(i)) {
+                    sameCnt++;
+                } else {
+                    differentCnt++;
+                }
+
+
+                if (sameCnt == differentCnt) {
+                    str.delete(0, i + 1);
+                    answer++;
+                    break;
+                }
+            }
+
+            if(sameCnt != differentCnt || str.length() == 0)
+                break;
+        }
+        
+        if(str.length() != 0) answer++;
+        
+        return answer;
+    }
+}
+
+
+//문자열을 조작하지 않고 인덱스 조정으로 푼 문제
+
+
+class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        
+        int startIdx = 0;
+
+        while(true) {
+            char firstWord = s.charAt(startIdx);
+            int sameCnt = 0;
+            int differentCnt = 0;
+
+            for (int i = startIdx; i < s.length(); i++) {
+                if (firstWord == s.charAt(i)) {
+                    sameCnt++;
+                } else {
+                    differentCnt++;
+                }
+
+
+                if (sameCnt == differentCnt) {
+                    startIdx = i + 1;
+                    answer++;
+                    break;
+                }
+            }
+
+            if(sameCnt != differentCnt || startIdx >= s.length())
+                break;
+        }
+        if(startIdx < s.length()) answer++;
+        
+        return answer;
+    }
+}
+
+
+
+
+//속도는 당연히 문자열 조작하지 않고 푼 문제가 더 빠르다.
