@@ -1,0 +1,35 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/155652?language=java
+
+class Solution {
+    public String solution(String s, String skip, int index) {
+
+        StringBuilder str = new StringBuilder();
+
+      for(int i = 0; i < s.length(); i++){
+         int charToInt = ((int) s.charAt(i));
+         int same = 0;
+
+         int tempIndex = index;
+         for(int j = s.charAt(i) + 1; j <= s.charAt(i) + tempIndex; j++){
+             if(j > 122) {
+                 if(skip.indexOf((j - 97) % 26 + 97) != - 1){
+                     same++;
+                     tempIndex++;
+                 }
+             }
+             else if(skip.indexOf(j) != - 1){
+                 same++;
+                 tempIndex++;
+             }
+         }
+         charToInt += same + index;
+         if(charToInt > 122) {
+             charToInt = (charToInt - 97) % 26 + 97;
+             str.append((char)charToInt);
+         }else str.append((char)charToInt);
+
+     }
+        
+        return str.toString();
+    }
+}
