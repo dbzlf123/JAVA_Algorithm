@@ -1,0 +1,34 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/133502?language=java
+
+import java.util.*;
+class Solution {
+    public int solution(int[] ingredient) {
+        int answer = 0;
+        int[] pattern = {1, 2, 3, 1};
+
+        Stack<Integer> st = new Stack<>();
+
+            for (int i = 0; i < ingredient.length; i++) {
+                st.push(ingredient[i]);
+                if(st.size() >= pattern.length){
+                    boolean find = true;
+
+                    for(int j = 0; j < pattern.length; j++){
+                        if(st.get(st.size() - pattern.length + j) != pattern[j]){
+                            find = false;
+                            break;
+                        }
+                    }
+                    if(find){
+                        for(int j = 0; j < pattern.length; j++){
+                            st.pop();
+                        }
+                        answer++;
+                    }
+                }
+            }
+        
+        return answer;
+    }
+    
+}
