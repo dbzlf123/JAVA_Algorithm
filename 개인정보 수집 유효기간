@@ -1,0 +1,41 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/150370
+
+import java.util.*;
+
+class Solution {
+    public int[] solution(String today, String[] terms, String[] privacies) {
+
+        int todayYear = Integer.parseInt(today.substring(0, 4));
+        int todayMonth = Integer.parseInt(today.substring(5, 7));
+        int todayDay = Integer.parseInt(today.substring(8, 10));
+
+        int todaySum = todayYear * 12 * 28 + todayMonth * 28 + todayDay;
+
+        ArrayList<Integer> answer = new ArrayList<>();
+
+        Map<Character, Integer> termsMap = new HashMap<>();
+        for(int i = 0; i < terms.length; i++){
+            termsMap.put(terms[i].charAt(0), Integer.valueOf(terms[i].substring(2, terms[i].length())));
+        }
+
+        for (int i = 0; i < privacies.length; i++) {
+            int year = Integer.parseInt(privacies[i].substring(0, 4));
+            int month = Integer.parseInt(privacies[i].substring(5, 7));
+            int day = Integer.parseInt(privacies[i].substring(8, 10));
+            char grade = privacies[i].charAt(11);
+
+            int future = (year * 12 * 28) + (month * 28) + day + (28 * termsMap.get(grade));
+
+            if(future <= todaySum) answer.add(i + 1);
+
+        }
+        answer.stream().mapToInt(value -> value);
+
+        int[] answers = new int[answer.size()];
+        for(int i = 0; i < answer.size(); i++){
+            answers[i] = answer.get(i);
+        }
+        
+        return answers;
+    }
+}
