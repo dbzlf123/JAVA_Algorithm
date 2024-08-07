@@ -1,0 +1,65 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/172928?language=java
+
+
+import java.util.*;
+
+class Solution {
+    
+    private static class Pair{
+        int x, y;
+        Pair(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    
+    public int[] solution(String[] park, String[] routes) {
+        int[] dir_x = {0, 1, 0, -1};
+        int[] dir_y = {-1, 0, 1, 0};
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('E', 1);
+        map.put('S', 2);
+        map.put('W', 3);
+        map.put('N', 0);
+
+        Pair pos = new Pair(0, 0);
+
+        for(int i = 0; i < park.length; i++){
+            for(int j = 0; j < park[i].length(); j++){
+                if(park[i].charAt(j) == 'S') {
+                    pos.x = j;
+                    pos.y = i;
+                }
+            }
+        }
+
+        for(int i = 0; i < routes.length; i++){
+            char dir = routes[i].charAt(0);
+            int repeat = Integer.parseInt(routes[i].substring(2, 3));
+
+            boolean success = true;
+            //깊은 복사로 값 복사
+            Pair tempPos = new Pair(pos.x, pos.y);
+            for(int j = 0; j < repeat; j++){
+                int xx = tempPos.x + dir_x[map.get(dir)];
+                int yy = tempPos.y + dir_y[map.get(dir)];
+
+                if(xx < 0 || xx >= park[0].length() || yy < 0 || yy >= park.length || park[yy].charAt(xx) == 'X'){
+                    success = false;
+                    break;
+                }
+                tempPos.x = xx;
+                tempPos.y = yy;
+            }
+            if(success){
+                pos.x += dir_x[map.get(dir)] * repeat;
+                pos.y += dir_y[map.get(dir)] * repeat;
+            }
+        }
+
+        int[] answer = new int[2];
+        answer[0] = pos.y;
+        answer[1] = pos.x;
+        return answer;
+    }
+}
