@@ -1,0 +1,35 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/92334?language=cpp
+
+import java.util.*;
+
+class Solution {
+    public int[] solution(String[] id_list, String[] report, int k) {
+        Map<String, Integer> ids = new HashMap<>();
+       for(int i = 0; i < id_list.length; i++) ids.put(id_list[i], i);
+
+       Map<String, Set<String>> reports = new HashMap<>();
+
+       for(int i = 0; i < report.length; i++){
+           String[] str = report[i].split(" ");
+           if(reports.containsKey(str[1])){
+                reports.get(str[1]).add(str[0]);
+           }else {
+               Set<String> tempSet = new HashSet<>();
+               tempSet.add(str[0]);
+               reports.put(str[1],tempSet);
+           }
+       }
+
+       int[] answer = new int[id_list.length];
+       for(Set<String> reporter : reports.values()){
+           if(reporter.size() >= k){
+               for(String name : reporter){
+                   int idx = ids.get(name);
+                   answer[idx]++;
+               }
+           }
+       }
+
+        return answer;
+    }
+}
