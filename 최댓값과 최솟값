@@ -1,0 +1,28 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/12939?language=java
+
+class Solution {
+    public String solution(String s) {
+        String answer = "";
+        
+        String[] str = s.split(" ");
+        StringBuilder sb = new StringBuilder();
+
+        int minNumber = Integer.parseInt( str[0]);
+        int maxNumber = Integer.parseInt( str[0]);
+        for(String ss : str){
+            int tempNumber =Integer.parseInt( ss);
+            if(minNumber > tempNumber){
+                minNumber = tempNumber;
+            }
+            if(maxNumber < tempNumber){
+                maxNumber = tempNumber;
+            }
+        }
+
+        sb.append(minNumber);
+        sb.append(" ");
+        sb.append(maxNumber);
+        
+        return sb.toString();
+    }
+}
