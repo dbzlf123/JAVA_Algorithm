@@ -1,0 +1,28 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/12951?language=java
+
+
+class Solution {
+    public String solution(String s) {
+        String[] str = s.split(" ", -1);
+        StringBuilder answer = new StringBuilder();
+        for(String ss : str){
+            String tempSS = ss.toLowerCase();
+            if(!ss.isEmpty() && !Character.isDigit(ss.charAt(0))){
+                char tempChar =  Character.toUpperCase(tempSS.charAt(0));
+                answer.append(tempChar);
+                answer.append(tempSS, 1, tempSS.length());
+                answer.append(" ");
+            }
+            else if(ss.isEmpty()){
+                answer.append(" ");
+            }
+            else{
+                answer.append(tempSS);
+                answer.append(" ");
+            }
+        }
+        answer.deleteCharAt(answer.length() - 1);
+        
+        return answer.toString();
+    }
+}
