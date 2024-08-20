@@ -1,0 +1,23 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/42747?language=java
+
+
+import java.util.*;
+class Solution {
+    public int solution(int[] citations) {
+        
+        Integer[] integerArray = Arrays.stream(citations).boxed().toArray(Integer[]::new);
+
+        Arrays.sort(integerArray, Collections.reverseOrder());
+
+        citations = Arrays.stream(integerArray).mapToInt(Integer::intValue).toArray();
+
+        int i;
+        for(i = 0; i < citations.length; i++){
+            if(citations[i] <= i)
+                break;
+            }
+        
+        return i;
+    }
+}
+
