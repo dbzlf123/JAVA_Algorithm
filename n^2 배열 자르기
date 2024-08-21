@@ -1,0 +1,24 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/87390
+
+  import java.util.*;
+import static java.lang.Math.*;
+class Solution {
+    public LinkedList<Long> solution(int n, long left, long right) {
+        
+        LinkedList<Long> ll = new LinkedList<>();
+        for(long i = left; i <= right; i++){
+            long temp;
+            long tempA = i / n;
+            long tempB = i % n;
+            long tempC = 0;
+            tempC = max(tempA, tempB);
+            temp = tempC + 1;
+
+
+            ll.add(temp);
+        }
+
+        
+        return ll;
+    }
+}
