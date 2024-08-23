@@ -1,0 +1,31 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/131127
+
+import java.util.*;
+class Solution {
+    public int solution(String[] want, int[] number, String[] discount) {
+        int answer = 0;
+        
+        Map<String, Integer> map =  new HashMap<>();
+        int totalSize = 0;
+        for(int i = 0; i < want.length; i++){
+            map.put(want[i], number[i]);
+            totalSize += number[i];
+        }
+
+        for(int i = 0; i <= discount.length - totalSize; i++){
+            Map<String, Integer> tempMap = new HashMap<>(map);
+            for(int j = i; j < totalSize + i; j++){
+                if(tempMap.containsKey(discount[j])){
+                    tempMap.put(discount[j], tempMap.get(discount[j]) - 1);
+                    if(tempMap.get(discount[j]) == 0){
+                        tempMap.remove(discount[j]);
+                    }
+                }
+            }
+            if(tempMap.isEmpty()) answer++;
+            
+        }
+        
+        return answer;
+    }
+}
