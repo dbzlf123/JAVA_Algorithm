@@ -1,0 +1,62 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/92341?language=java
+
+
+import java.util.*;
+import static java.lang.Math.*;
+class Solution {
+    static int convertTime(String time){
+        String[] tempTime = time.split(":");
+
+        int outTime = Integer.parseInt(tempTime[0]) * 60;
+        outTime += Integer.parseInt(tempTime[1]);
+
+        return outTime;
+    }
+    
+    public int[] solution(int[] fees, String[] records) {
+
+        //차량번호,    시간
+        Map<String, Integer> In = new HashMap<>();
+        Map<String, Integer> answer = new HashMap<>();
+
+        for(int i = 0; i < records.length; i++){
+            String[] tempStr = records[i].split(" ");
+
+            int tempTime = 0;
+            int money = 0;
+            if(tempStr[2].equals("IN")){
+                In.put(tempStr[1], convertTime(tempStr[0]));
+            }else{
+                tempTime = convertTime(tempStr[0]) - In.get(tempStr[1]);
+                In.remove(tempStr[1]);
+                if(answer.containsKey(tempStr[1])){
+                    answer.replace(tempStr[1], answer.get(tempStr[1]) + tempTime);
+                }else answer.put(tempStr[1], tempTime);
+            }
+        }
+
+        for(String key : In.keySet()){
+            int tempTime = 0;
+            tempTime = convertTime("23:59") - In.get(key);
+            if(answer.containsKey(key)){
+                answer.replace(key, answer.get(key) + tempTime);
+            }else {
+                answer.put(key, tempTime);
+            }
+        }
+
+        List<String> keySet = new ArrayList<>(answer.keySet());
+        Collections.sort(keySet);
+        int[] answerArray = new int[keySet.size()];
+
+        for (int i = 0; i < keySet.size(); i++) {
+            answerArray[i] = fees[1];
+             if(answer.get(keySet.get(i)) > fees[0]){
+                 int tempTime = (answer.get(keySet.get(i)) - fees[0]);
+                 answerArray[i] += (int) ceil(((double) tempTime / fees[2])) * fees[3];
+             }
+        }
+        
+        return answerArray;
+    }
+}
