@@ -1,0 +1,34 @@
+//https://school.programmers.co.kr/learn/courses/30/lessons/131704?language=java
+
+import java.util.*;
+
+class Solution {
+    public int solution(int[] order) {
+        int answer = 0;
+        int n = order.length;
+        Stack<Integer> st = new Stack<>();
+        int realSize = 1;
+        int boxIndex = 0;
+
+        while(realSize <= n){
+            if(realSize == order[boxIndex]){
+                realSize++;
+                boxIndex++;
+                answer++;
+            }else if(!st.empty() && order[boxIndex] == st.peek()){
+                boxIndex++;
+                answer++;
+                st.pop();
+            }else{
+                st.push(realSize++);
+            }
+        }
+
+        while (!st.isEmpty() && st.peek() == order[boxIndex]) {
+            st.pop();
+            answer++;
+            boxIndex++;
+        }
+        return answer;
+    }
+}
